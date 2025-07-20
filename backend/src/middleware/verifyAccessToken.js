@@ -1,6 +1,6 @@
-import jwt from "jsonwebtoken";
+const jwt = require("jsonwebtoken");
 
-export const verifyAccessToken = (req, res, next) => {
+const verifyAccessToken = (req, res, next) => {
   const authHeader = req.headers["authorization"];
   if (!authHeader)
     return res.status(401).json({ error: "Authorization header missing" });
@@ -15,4 +15,9 @@ export const verifyAccessToken = (req, res, next) => {
   } catch (err) {
     return res.status(403).json({ error: "Invalid or expired token" });
   }
+};
+
+
+module.exports = {
+  verifyAccessToken
 };

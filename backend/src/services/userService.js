@@ -1,8 +1,8 @@
-import User from "../models/userModel.js";
-import bcrypt from "bcryptjs";
-import jwt from "jsonwebtoken";
+const User = require("../models/userModel.js");
+const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
 
-export const registerUser = async ({ name, email, password, role }) => {
+const registerUser = async ({ name, email, password, role }) => {
   const existingUser = await User.findOne({ email });
   if (existingUser) throw new Error("User already exists");
 
@@ -32,7 +32,7 @@ export const registerUser = async ({ name, email, password, role }) => {
   };
 };
 
-export const loginUser = async ({ email, password }) => {
+const loginUser = async ({ email, password }) => {
   const user = await User.findOne({ email });
 
   if (!user) {
@@ -63,4 +63,10 @@ export const loginUser = async ({ email, password }) => {
       role: user.role,
     },
   };
+};
+
+
+module.exports = {
+  registerUser,
+  loginUser
 };

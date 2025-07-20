@@ -1,6 +1,5 @@
-import * as profileService from "../services/creatorProfile.js";
-
-export const createProfile = async (req, res) => {
+const profileService = require("../services/creatorProfile.js");
+const createProfile = async (req, res) => {
   try {
     const newProfile = await profileService.createProfile(req.body);
     res.status(201).json(newProfile);
@@ -9,7 +8,7 @@ export const createProfile = async (req, res) => {
   }
 };
 
-export const getProfiles = async (_req, res) => {
+const getProfiles = async (_req, res) => {
   try {
     const profiles = await profileService.getAllProfiles();
     res.json(profiles);
@@ -18,7 +17,7 @@ export const getProfiles = async (_req, res) => {
   }
 };
 
-export const getProfile = async (req, res) => {
+const getProfile = async (req, res) => {
   try {
     const profile = await profileService.getProfileByUserId(req.params.userId);
     if (!profile) return res.status(404).json({ error: "Not found" });
@@ -28,7 +27,7 @@ export const getProfile = async (req, res) => {
   }
 };
 
-export const updateProfile = async (req, res) => {
+const updateProfile = async (req, res) => {
   try {
     const updated = await profileService.updateProfile(
       req.params.userId,
@@ -40,7 +39,7 @@ export const updateProfile = async (req, res) => {
   }
 };
 
-export const deleteProfile = async (req, res) => {
+const deleteProfile = async (req, res) => {
   try {
     await profileService.deleteProfile(req.params.userId);
     res.json({ message: "Profile deleted" });
@@ -49,7 +48,7 @@ export const deleteProfile = async (req, res) => {
   }
 };
 
-export const syncInstagram = async (req, res) => {
+const syncInstagram = async (req, res) => {
   try {
     const updated = await profileService.syncInstagramData(
       req.params.userId,
@@ -59,4 +58,14 @@ export const syncInstagram = async (req, res) => {
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
+};
+
+
+module.exports = {
+  createProfile,
+  getProfiles,
+  getProfile,
+  updateProfile,
+  deleteProfile,
+  syncInstagram
 };

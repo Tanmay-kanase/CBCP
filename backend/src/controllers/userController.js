@@ -1,9 +1,8 @@
-import { registerUser, loginUser } from "../services/userService.js";
-import { sendOTP } from "../utils/otp.js";
-
+const { registerUser, loginUser } = require("../services/userService");
+const { sendOTP } = require("../utils/otp");
 const otpStore = {};
 
-export const register = async (req, res, next) => {
+const register = async (req, res, next) => {
   try {
     const user = await registerUser(req.body);
     res.status(201).json(user);
@@ -12,7 +11,7 @@ export const register = async (req, res, next) => {
   }
 };
 
-export const login = async (req, res, next) => {
+const login = async (req, res, next) => {
   try {
     const data = await loginUser(req.body);
     res.status(200).json(data);
@@ -22,7 +21,7 @@ export const login = async (req, res, next) => {
   }
 };
 
-export const verifyOtp = async (req, res, next) => {
+const verifyOtp = async (req, res, next) => {
   try {
     const { email, otp } = req.body;
     if (otpStore[email] && otpStore[email] == otp) {
@@ -36,7 +35,7 @@ export const verifyOtp = async (req, res, next) => {
   }
 };
 
-export const sendOtpToEmail = async (req, res, next) => {
+const sendOtpToEmail = async (req, res, next) => {
   try {
     const { email } = req.body;
     const otp = Math.floor(100000 + Math.random() * 900000);
@@ -47,4 +46,12 @@ export const sendOtpToEmail = async (req, res, next) => {
     console.log(err);
     next(err);
   }
+};
+
+
+module.exports = {
+  register,
+  login,
+  verifyOtp,
+  sendOtpToEmail
 };

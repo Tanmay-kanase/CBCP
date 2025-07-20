@@ -1,18 +1,25 @@
-import express from "express";
-import * as creatorController from "../controllers/creatorProfileController.js";
-import { verifyAccessToken } from "../middleware/verifyAccessToken.js";
+const express = require("express");
+const creatorController = require("../controllers/creatorProfileController");
+const profileRoutes = express.Router();
+const { verifyAccessToken } = require("../middleware/verifyAccessToken");
 
-const router = express.Router();
-
-router.post("/", verifyAccessToken, creatorController.createProfile);
-router.get("/", verifyAccessToken, creatorController.getProfiles);
-router.get("/:userId", verifyAccessToken, creatorController.getProfile);
-router.put("/:userId", verifyAccessToken, creatorController.updateProfile);
-router.delete("/:userId", verifyAccessToken, creatorController.deleteProfile);
-router.patch(
+profileRoutes.post("/", verifyAccessToken, creatorController.createProfile);
+profileRoutes.get("/", verifyAccessToken, creatorController.getProfiles);
+profileRoutes.get("/:userId", verifyAccessToken, creatorController.getProfile);
+profileRoutes.put(
+  "/:userId",
+  verifyAccessToken,
+  creatorController.updateProfile
+);
+profileRoutes.delete(
+  "/:userId",
+  verifyAccessToken,
+  creatorController.deleteProfile
+);
+profileRoutes.patch(
   "/:userId/sync-instagram",
   verifyAccessToken,
   creatorController.syncInstagram
 );
 
-export default router;
+module.exports = profileRoutes;

@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+const mongoose = require("mongoose");
 
 const creatorProfileSchema = new mongoose.Schema(
   {
@@ -36,4 +36,4 @@ const creatorProfileSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-export default mongoose.model("CreatorProfile", creatorProfileSchema);
+module.exports = mongoose.model("CreatorProfile", creatorProfileSchema);
