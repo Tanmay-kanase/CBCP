@@ -4,7 +4,7 @@ const userRoutes = require("./routes/userRoutes");
 const profileRoutes = require("./routes/creatorProfileRoutes");
 const campaignRoutes = require("./routes/campaignRoutes");
 const app = express();
-app.use(cors());
+
 
 app.use(express.json());
 
