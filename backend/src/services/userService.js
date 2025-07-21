@@ -32,7 +32,7 @@ const registerUser = async ({ name, email, password, role }) => {
   };
 };
 
-const loginUser = async ({ email, password }) => {
+const loginUser = async ({ email, password, role }) => {
   const user = await User.findOne({ email });
 
   if (!user) {
@@ -45,6 +45,12 @@ const loginUser = async ({ email, password }) => {
   if (!isMatch) {
     const error = new Error("Wrong password");
     error.code = 401;
+    throw error;
+  }
+
+  if (user.role !== role) {
+    const error = new Error("Role mismatch");
+    error.code = 403;
     throw error;
   }
 
@@ -65,8 +71,7 @@ const loginUser = async ({ email, password }) => {
   };
 };
 
-
 module.exports = {
   registerUser,
-  loginUser
+  loginUser,
 };

@@ -19,7 +19,7 @@ const creatorProfileSchema = new mongoose.Schema(
       igUserId: String,
       followersCount: Number,
       mediaCount: Number,
-      accessToken: { type: String, required: true },
+      accessToken: { type: String },
       tokenExpiresAt: Date,
       lastSync: Date,
     },

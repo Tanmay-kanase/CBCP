@@ -5,6 +5,7 @@ const createProfile = async (req, res) => {
     res.status(201).json(newProfile);
   } catch (err) {
     res.status(500).json({ error: err.message });
+    console.log(err);
   }
 };
 
@@ -60,12 +61,11 @@ const syncInstagram = async (req, res) => {
   }
 };
 
-
 module.exports = {
   createProfile,
   getProfiles,
   getProfile,
   updateProfile,
   deleteProfile,
-  syncInstagram
+  syncInstagram,
 };
