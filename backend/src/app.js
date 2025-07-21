@@ -6,7 +6,7 @@ const campaignRoutes = require("./routes/campaignRoutes");
 const app = express();
 app.use(
   cors({
-    origin: "http://localhost:5173", // frontend origin
+    origin: process.env.FRONTEND_URL, // frontend origin
     credentials: true, // allow cookies/authorization header
   })
 );
