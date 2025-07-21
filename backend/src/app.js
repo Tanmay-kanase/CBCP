@@ -4,12 +4,8 @@ const userRoutes = require("./routes/userRoutes");
 const profileRoutes = require("./routes/creatorProfileRoutes");
 const campaignRoutes = require("./routes/campaignRoutes");
 const app = express();
-app.use(
-  cors({
-    origin: process.env.FRONTEND_URL, // frontend origin
-    credentials: true, // allow cookies/authorization header
-  })
-);
+app.use(cors());
+
 app.use(express.json());
 
 app.use("/api/users", userRoutes);
